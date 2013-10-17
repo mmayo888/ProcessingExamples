@@ -15,6 +15,7 @@ Week 2/3: Encapsulation
 * Example of a program with multiple classes (e.g. ???)
 * Example of a class with a has-a relation to another class (e.g. a house composed of windows, a door etc)
 * Example of a class containing a collection of objects from another class (e.g. a swarm composed of a list of insects)
+* Examples of a programs using particle systems (see Nature of Code ch. 4)
 
 Week 4: UI Library (not sure which one yet...)
 * Examples of how to use single controls
