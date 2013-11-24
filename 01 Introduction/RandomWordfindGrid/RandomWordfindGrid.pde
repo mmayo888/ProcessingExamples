@@ -1,4 +1,4 @@
-/* MovingBar
+/* RandomWordfindGrid
  * Author: Michael Mayo
  *
  * This program demonstrates how to use two dimensional arrays and for loops.
