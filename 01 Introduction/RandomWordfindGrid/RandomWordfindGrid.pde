@@ -33,7 +33,8 @@ char[][] letters;
 void setup(){
   // Set the size of the sketchpad
   size(SKETCHPAD_WIDTH, SKETCHPAD_HEIGHT);
-  // Calcluate the height and width of each letter
+  // Calcluate the height and width of each letter 
+  // (including the ellipse around it and the spacing between ellipses)
   letterWidth=SKETCHPAD_WIDTH/WORDFIND_GRID_WIDTH;
   letterHeight=SKETCHPAD_HEIGHT/WORDFIND_GRID_HEIGHT;
   // Create the wordfind letters
@@ -65,8 +66,9 @@ void draw() {
     // Draw the letter
     noStroke();
     fill(WORDFIND_GRID_LETTER_COLOUR);
-    textSize(letterHeight-2*WORDFIND_GRID_SPACING);
-    text(letters[ x ][ y ],ellipseCenterX-WORDFIND_GRID_SPACING, ellipseCenterY+WORDFIND_GRID_SPACING);
+    textSize(letterHeight-2*WORDFIND_GRID_SPACING);       // Make size of text smaller than the ellipse
+    textAlign(CENTER);                                    // Alignment is centered on x position
+    text(letters[ x ][ y ],ellipseCenterX, ellipseCenterY+letterHeight/4); // Draw the letter
   }
     
 }
