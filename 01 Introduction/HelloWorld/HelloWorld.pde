@@ -1,4 +1,5 @@
 /* Hello, World example
+ * Author: Michael Mayo
  * 
  * This program demonstrates (i) how to print 'Hello, world' to the console when setup first runs,
  * and (ii) how to display 'Hello, world' on the sketchpad using the text() function

@@ -1,4 +1,5 @@
 /* MovingBar
+ * Author: Michael Mayo
  *
  * This program demonstrates how to use constants and if/then to create a simple animation.
  * A vertical bar is moved from left to right across the sketchpad. When it reaches the right edge,
