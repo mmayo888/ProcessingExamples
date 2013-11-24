@@ -6,6 +6,7 @@ Processing Examples for COMP258
 Rough weekly topics for the programming lectures, with examples to go along with them:
 
 Week 1: Introduction to Processing
+* Examples showing how to apply COMP103 concepts in processing, i.e. if/then/else, loops, arrays etc
 * Example of how to make an app that is responsive to mouse clicks
 * Example of how to draw ellipses, lines, etc, with/without strokes and fills, and how to choose colours
 * Example of how to animate something by adjusting its position every frame
