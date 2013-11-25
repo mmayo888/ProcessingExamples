@@ -4,6 +4,8 @@
  * This program demonstrates how to make a class and use a multiple objects from it.
  * The class is called Tree. Please see the Tree class definition itself for a description
  * of the Tree class' properties and methods.
+ *
+ * The multiple tree objects are stored in a collection.
  */
 
 // Constants defining the sketchpad size and the number of trees
@@ -11,7 +13,7 @@ final int SKETCHPAD_WIDTH = 1000;
 final int SKETCHPAD_HEIGHT = 600;
 final int NUM_TREES = 20;
 
-// Global reference to an list of trees
+// Global reference to an collection of trees
 ArrayList<Tree> forest;
 
 /*
