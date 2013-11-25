@@ -2,7 +2,7 @@
  * Author: Michael Mayo
  *
  * This program demonstrates how to make a class and use a single object.
- * The class that is created is called Tree. Please see the Tree class definition itself for a description
+ * The class is called Tree. Please see the Tree class definition itself for a description
  * of the Tree class' properties and methods.
  */
 
