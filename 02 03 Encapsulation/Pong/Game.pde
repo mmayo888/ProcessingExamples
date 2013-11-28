@@ -56,17 +56,11 @@ class Game {
     ball.draw();
     // Draw the scores
     drawScores();
-    // Move the bats for the next frame, but don't allow them to go off the playfield
-    if (keysDown['z'] && batHigh.getPosition().x - batHigh.getSize() / 2  > playfieldTopLeft.x) 
-      batHigh.move(-1);
-    if (keysDown['c'] && batHigh.getPosition().x + batHigh.getSize() / 2  < playfieldTopLeft.x + playfieldSize.x) 
-      batHigh.move(1);
-    if (keysDown['1'] && batLow.getPosition().x - batLow.getSize() / 2  > playfieldTopLeft.x)
-      batLow.move(-1);
-    if (keysDown['3'] && batLow.getPosition().x + batLow.getSize() / 2  < playfieldTopLeft.x + playfieldSize.x)
-      batLow.move(1);
+    // Move the bats for the next frame
+    moveBats();
     // Move the ball, checking for collisions and adjusting the velocity accordingly
     checkBallPlayfieldCollisions();
+    checkBallBatCollisions();
     ball.move();
     // If the ball hits goal, we create a new ball
     int goalCollisionCode = checkBallGoalCollisions();
@@ -94,7 +88,6 @@ class Game {
     // Work out an initial random velocity for the ball
     PVector initialBallVelocity = PVector.random2D();
     initialBallVelocity.mult( INITIAL_BALL_VELOCITY );
-    println(initialBallVelocity);
     // Ensure that the y velocity is greater than the x velocity to prevent too much wall bouncing
     if (abs(initialBallVelocity.x) > abs(initialBallVelocity.y)) {
       float temp = initialBallVelocity.x;
@@ -104,6 +97,18 @@ class Game {
     // Create and return a ball
     return new Ball( new PVector( playfieldTopLeft.x + playfieldSize.x/2, playfieldTopLeft.y + playfieldSize.y/2 ), 
     BALL_COLOR, INITIAL_BALL_SIZE, initialBallVelocity);
+  }
+
+  // Method to move the bats according to the keys that are held down, while not allowing them to go off the playfield
+  private void moveBats() {
+    if (keysDown['z'] && batHigh.getPosition().x - batHigh.getSize() / 2  > playfieldTopLeft.x) 
+      batHigh.move(-1);
+    if (keysDown['c'] && batHigh.getPosition().x + batHigh.getSize() / 2  < playfieldTopLeft.x + playfieldSize.x) 
+      batHigh.move(1);
+    if (keysDown['1'] && batLow.getPosition().x - batLow.getSize() / 2  > playfieldTopLeft.x)
+      batLow.move(-1);
+    if (keysDown['3'] && batLow.getPosition().x + batLow.getSize() / 2  < playfieldTopLeft.x + playfieldSize.x)
+      batLow.move(1);
   }
 
   // Method to check for a collision between the left and right hand sides of the playfield and the ball, 
@@ -121,6 +126,24 @@ class Game {
       ballVelocity.x *= -1;
       ball.setVelocity( ballVelocity );
     }
+  }
+
+  // Method to check if the ball hit one of the bats, adjusting the ball's velocity
+  // according if it does
+  private void checkBallBatCollisions() {
+    // Get a copy of the ball's current position and velocity
+    PVector ballPosition = ball.getPosition(), ballVelocity = ball.getVelocity();
+    // Get a copy of the bat's positions
+    PVector batHighPosition = batHigh.getPosition(), batLowPosition = batLow.getPosition();
+    // Does the ball overlap the high bat?
+    if (ballPosition.x >= batHighPosition.x - batHigh.getSize()/2 && ballPosition.x <= batHighPosition.x + batHigh.getSize()/2)
+      if (ballPosition.y - ball.getSize()/2 <= batHighPosition.y && ballPosition.y + ball.getSize()/2 >= batHighPosition.y)
+        ball.setVelocity( new PVector( ballVelocity.x, -1 * ballVelocity.y) );
+    // Does the ball overlap the low bat?
+    if (ballPosition.x >= batLowPosition.x - batLow.getSize()/2 && ballPosition.x <= batLowPosition.x + batLow.getSize()/2)
+      if (ballPosition.y - ball.getSize()/2 <= batLowPosition.y && ballPosition.y + ball.getSize()/2 >= batLowPosition.y)
+        ball.setVelocity( new PVector( ballVelocity.x, -1 * ballVelocity.y) );
+     
   }
 
   // Method to check if the ball has hit either the top or bottom side of the playfield
