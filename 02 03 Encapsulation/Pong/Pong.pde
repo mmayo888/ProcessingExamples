@@ -5,8 +5,8 @@
  * Implementation of a simple OO Pong game to illustrate encapsulation.
  * There are three classes:
  * -- Bat, encapsulating bat state, movement and drawing
- * -- Ball, encapsulating ball state, movement and drawing
- * -- Game, encapsulating the game mechanics
+ * -- Ball, encapsulating ball collision detection, state, movement and drawing
+ * -- Game, encapsulating the game mechanics and score, the bat objects, and the ball
  */
 
 

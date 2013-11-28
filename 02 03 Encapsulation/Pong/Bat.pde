@@ -1,6 +1,8 @@
 /*
  * Bat
  * 
+ * A class encapsulating bat that can move and draw itself
+ *
  */
 
 

@@ -1,6 +1,7 @@
 /*
- * Game
+ * Game class
  * 
+ * A class encapsulating the game objects and the mechanics and rules of Pong
  */
 
 
@@ -66,19 +67,28 @@ class Game {
     moveBats();
     // Move the ball for the next frame
     ball.move();
-    // Checking for collisions 
-    // Check to see if the ball hit the left or right edge of the playfield
-    checkBallPlayfieldCollisions();
-    checkBallBatCollisions();
-    // If the ball hits goal, we create a new ball
-    int goalCollisionCode = checkBallGoalCollisions();
-    if (goalCollisionCode!=0) {
-      // Determine which goal was hit and update the scores
-      if (goalCollisionCode == 1) scoreHigh++;
-      else if (goalCollisionCode == -1) scoreLow++;
-      // Create a new goal
-      ball = createBall();
+    // Increase the speed of the ball by 0.1% per frame for a fun challenge
+    PVector newBallVelocity = ball.getVelocity();
+    newBallVelocity.mult(1.001);
+    ball.setVelocity( newBallVelocity );
+    // Check for collisions between the ball and the sides of the playfield
+    // or the bats and the ball
+    checkCollisions();
+    // Check to see if the ball hit one of the goals (i.e. the top or bottom of the playfield)
+    // If it has, then the round is over and we start a new round with a new ball
+    // For fun, for every point a player loses, their bat size shrinks by 5%.
+    boolean roundOver = false;
+    if (ball.getPosition().y < playfieldTopLeft.y) {
+      scoreLow++;
+      batHigh.setSize( batHigh.getSize() * 0.95 );
+      roundOver=true;
+    }  
+    else if (ball.getPosition().y > playfieldTopLeft.y+playfieldSize.y) {
+      scoreHigh++;
+      batLow.setSize( batLow.getSize() * 0.95 );
+      roundOver=true;
     }
+    if (roundOver) ball = createBall();
   }
 
   // Method  called whenever a key is pressed: we want to record this in the keysDown flag array
@@ -119,48 +129,8 @@ class Game {
       batLow.move(1);
   }
 
-  // Method to check for a collision between the left and right hand sides of the playfield and the ball, 
-  // adjusting the ball's velocity accordingly
-  private void checkBallPlayfieldCollisions() {
-    // Get a copy of the ball's current position and velocity
-    PVector newBallVelocity = ball.getVelocity();
-    // Check for a collision with the left-hand size of the playfield
-    if (ball.getPosition().x - ball.getSize()/2 <= playfieldTopLeft.x) {
-      newBallVelocity.x *= -1;
-      ball.setVelocity( newBallVelocity );
-    } 
-    // Check for a collision with the right-hand size of the playfield
-    else if (ball.getPosition().x + ball.getSize()/2 >= playfieldTopLeft.x + playfieldSize.x) {
-      newBallVelocity.x *= -1;
-      ball.setVelocity( newBallVelocity );
-    }
-  }
 
-  // Method to check if the ball hit one of the bats, adjusting the ball's velocity
-  // according if it does
-  private void checkBallBatCollisions() {
-    // Does the ball overlap the high bat?
-    if (ball.getPosition().x >= batHigh.getPosition().x - batHigh.getSize()/2 && ball.getPosition().x <= batHigh.getPosition().x + batHigh.getSize()/2)
-      if (ball.getPosition().y - ball.getSize()/2 <= batHigh.getPosition().y && ball.getPosition().y + ball.getSize()/2 >= batHigh.getPosition().y)
-        ball.setVelocity( new PVector( ball.getVelocity().x, abs( ball.getVelocity().y ) ) );
-    // Does the ball overlap the low bat?
-    if (ball.getPosition().x >= batLow.getPosition().x - batLow.getSize()/2 && ball.getPosition().x <= batLow.getPosition().x + batLow.getSize()/2)
-      if (ball.getPosition().y - ball.getSize()/2 <= batLow.getPosition().y && ball.getPosition().y + ball.getSize()/2 >= batLow.getPosition().y)
-        ball.setVelocity( new PVector( ball.getVelocity().x, -1 * abs( ball.getVelocity().y ) ) );
-     
-  }
 
-  // Method to check if the ball has hit either the top or bottom side of the playfield
-  // Returns either -1 (top goal hit), 1 (bottom goal hit) or 0 (no goal hit)
-  private int checkBallGoalCollisions() {
-    // Check to see if the top goal has been hit
-    if (ball.getPosition().y < playfieldTopLeft.y) return -1;
-    // Check to see if the bottom goal has been hit
-    if (ball.getPosition().y > playfieldTopLeft.y + playfieldSize.y) return 1;
-    // If we get to here, no goal was hit
-    return 0;
-  }
-  
   // Method to draw the playfield
   private void drawPlayfield() {
     stroke(255);
@@ -168,7 +138,7 @@ class Game {
     strokeWeight(4);
     rect(playfieldTopLeft.x, playfieldTopLeft.y, playfieldSize.x, playfieldSize.y, 10);
   }
-  
+
   // Method to display the scores
   private void drawScores() {
     noStroke();
@@ -179,6 +149,30 @@ class Game {
     fill(BAT_LOW_COLOR);
     textAlign(LEFT);
     text(scoreLow, playfieldTopLeft.x+playfieldSize.x+10, playfieldTopLeft.y+playfieldSize.y/2);
+  }
+
+  // Method to check for all the collisions
+  private void checkCollisions() {
+    // Check for a collision with the left-hand size of the playfield
+    if (ball.checkCollisionVertical( playfieldTopLeft.x, playfieldTopLeft.y, playfieldTopLeft.y+playfieldSize.y ))
+      ball.bounceAgainstVertical();
+    // Check for a collision with the right-hand size of the playfield
+    else if (ball.checkCollisionVertical( playfieldTopLeft.x + playfieldSize.x, playfieldTopLeft.y, playfieldTopLeft.y+playfieldSize.y )) 
+      ball.bounceAgainstVertical();
+    // Check for collisions with the higher bat
+    // If there is a collision, then the new velocity will be down (positive y direction)
+    if (ball.checkCollisionHorizontal(batHigh.getPosition().x - batHigh.getSize()/2, batHigh.getPosition().x + batHigh.getSize()/2, batHigh.getPosition().y)) {
+      PVector velocity = ball.getVelocity();
+      velocity.y = abs(velocity.y);
+      ball.setVelocity( velocity );
+    }
+    // Check for collisions with the lower bat
+    // If there is a collision, then the new velocity will be up (negative y direction)
+    if (ball.checkCollisionHorizontal(batLow.getPosition().x - batLow.getSize()/2, batLow.getPosition().x + batLow.getSize()/2, batLow.getPosition().y)) {
+      PVector velocity = ball.getVelocity();
+      velocity.y = -1 * abs(velocity.y);
+      ball.setVelocity( velocity );
+    }
   }
 }
 
