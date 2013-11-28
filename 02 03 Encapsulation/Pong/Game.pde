@@ -15,6 +15,11 @@ class Game {
   public final color BALL_COLOR           = #E8233A;
   public final float INITIAL_BALL_SIZE    = 10;
   public final float INITIAL_BALL_VELOCITY = 2;
+  public final char  BAT_HIGH_LEFT        = 'z';
+  public final char  BAT_HIGH_RIGHT       = 'c';
+  public final char  BAT_LOW_LEFT         = '1';
+  public final char  BAT_LOW_RIGHT        = '3';
+  
 
   // Coordinates of the top left corner of the playfield
   private PVector playfieldTopLeft; 
@@ -119,24 +124,40 @@ class Game {
 
   // Method to move the bats according to the keys that are held down, while not allowing them to go off the playfield
   private void moveBats() {
-    if (keysDown['z'] && batHigh.getPosition().x - batHigh.getSize() / 2  > playfieldTopLeft.x) 
-      batHigh.move(-1);
-    if (keysDown['c'] && batHigh.getPosition().x + batHigh.getSize() / 2  < playfieldTopLeft.x + playfieldSize.x) 
-      batHigh.move(1);
-    if (keysDown['1'] && batLow.getPosition().x - batLow.getSize() / 2  > playfieldTopLeft.x)
-      batLow.move(-1);
-    if (keysDown['3'] && batLow.getPosition().x + batLow.getSize() / 2  < playfieldTopLeft.x + playfieldSize.x)
-      batLow.move(1);
+    if (keysDown[BAT_HIGH_LEFT] && batHigh.getPosition().x - batHigh.getSize() / 2  > playfieldTopLeft.x) 
+      batHigh.moveLeft();
+    if (keysDown[BAT_HIGH_RIGHT] && batHigh.getPosition().x + batHigh.getSize() / 2  < playfieldTopLeft.x + playfieldSize.x) 
+      batHigh.moveRight();
+    if (keysDown[BAT_LOW_LEFT] && batLow.getPosition().x - batLow.getSize() / 2  > playfieldTopLeft.x)
+      batLow.moveLeft();
+    if (keysDown[BAT_LOW_RIGHT] && batLow.getPosition().x + batLow.getSize() / 2  < playfieldTopLeft.x + playfieldSize.x)
+      batLow.moveRight();
   }
 
 
 
-  // Method to draw the playfield
+  // Method to draw the playfield, with a title above the below and keys to use below the playfield
   private void drawPlayfield() {
+    // Draw the title
+    noStroke();
+    fill(255);
+    textSize(32);
+    textAlign(CENTER);
+    text("Pong!", playfieldTopLeft.x + playfieldSize.x/2, 40);
+    // Draw the keys
+    fill( BAT_HIGH_COLOR );
+    textAlign(LEFT);
+    text( "["+BAT_HIGH_LEFT+","+BAT_HIGH_RIGHT+"]", playfieldTopLeft.x, playfieldTopLeft.y+playfieldSize.y+40 );
+    fill( BAT_LOW_COLOR );
+    textAlign(RIGHT);
+    text( "["+BAT_LOW_LEFT+","+BAT_LOW_RIGHT+"]", playfieldTopLeft.x+playfieldSize.x, playfieldTopLeft.y+playfieldSize.y+40 );
+    
+    // Draw the border
     stroke(255);
     noFill();
     strokeWeight(4);
     rect(playfieldTopLeft.x, playfieldTopLeft.y, playfieldSize.x, playfieldSize.y, 10);
+    
   }
 
   // Method to display the scores

@@ -74,10 +74,14 @@ class Bat {
     line( position.x - size/2, position.y, position.x + size/2, position.y);
   }
   
-  // Move method
-  // Moves the bat either to the left (-1) or right (+1)
-  public void move( int dir) {
-     position.x += dir * velocity; 
+  // Moves the bat left
+  public void moveLeft() {
+     position.x -= velocity; 
+  }
+  
+  // Moves the bat right
+  public void moveRight() {
+     position.x += velocity; 
   }
   
 }
