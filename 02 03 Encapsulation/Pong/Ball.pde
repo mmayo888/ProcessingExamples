@@ -1,3 +1,8 @@
+/*
+ * Ball
+ * 
+ */
+
 class Ball {
 
   // Color of the ball

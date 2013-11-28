@@ -1,3 +1,9 @@
+/*
+ * Game
+ * 
+ */
+
+
 class Game {
 
   // Constants specific to a game
@@ -58,10 +64,12 @@ class Game {
     drawScores();
     // Move the bats for the next frame
     moveBats();
-    // Move the ball, checking for collisions and adjusting the velocity accordingly
+    // Move the ball for the next frame
+    ball.move();
+    // Checking for collisions 
+    // Check to see if the ball hit the left or right edge of the playfield
     checkBallPlayfieldCollisions();
     checkBallBatCollisions();
-    ball.move();
     // If the ball hits goal, we create a new ball
     int goalCollisionCode = checkBallGoalCollisions();
     if (goalCollisionCode!=0) {
@@ -115,46 +123,40 @@ class Game {
   // adjusting the ball's velocity accordingly
   private void checkBallPlayfieldCollisions() {
     // Get a copy of the ball's current position and velocity
-    PVector ballPosition = ball.getPosition(), ballVelocity = ball.getVelocity();
+    PVector newBallVelocity = ball.getVelocity();
     // Check for a collision with the left-hand size of the playfield
-    if (ballPosition.x - ball.getSize()/2 <= playfieldTopLeft.x) {
-      ballVelocity.x *= -1;
-      ball.setVelocity( ballVelocity );
+    if (ball.getPosition().x - ball.getSize()/2 <= playfieldTopLeft.x) {
+      newBallVelocity.x *= -1;
+      ball.setVelocity( newBallVelocity );
     } 
     // Check for a collision with the right-hand size of the playfield
-    else if (ballPosition.x + ball.getSize()/2 >= playfieldTopLeft.x + playfieldSize.x) {
-      ballVelocity.x *= -1;
-      ball.setVelocity( ballVelocity );
+    else if (ball.getPosition().x + ball.getSize()/2 >= playfieldTopLeft.x + playfieldSize.x) {
+      newBallVelocity.x *= -1;
+      ball.setVelocity( newBallVelocity );
     }
   }
 
   // Method to check if the ball hit one of the bats, adjusting the ball's velocity
   // according if it does
   private void checkBallBatCollisions() {
-    // Get a copy of the ball's current position and velocity
-    PVector ballPosition = ball.getPosition(), ballVelocity = ball.getVelocity();
-    // Get a copy of the bat's positions
-    PVector batHighPosition = batHigh.getPosition(), batLowPosition = batLow.getPosition();
     // Does the ball overlap the high bat?
-    if (ballPosition.x >= batHighPosition.x - batHigh.getSize()/2 && ballPosition.x <= batHighPosition.x + batHigh.getSize()/2)
-      if (ballPosition.y - ball.getSize()/2 <= batHighPosition.y && ballPosition.y + ball.getSize()/2 >= batHighPosition.y)
-        ball.setVelocity( new PVector( ballVelocity.x, -1 * ballVelocity.y) );
+    if (ball.getPosition().x >= batHigh.getPosition().x - batHigh.getSize()/2 && ball.getPosition().x <= batHigh.getPosition().x + batHigh.getSize()/2)
+      if (ball.getPosition().y - ball.getSize()/2 <= batHigh.getPosition().y && ball.getPosition().y + ball.getSize()/2 >= batHigh.getPosition().y)
+        ball.setVelocity( new PVector( ball.getVelocity().x, abs( ball.getVelocity().y ) ) );
     // Does the ball overlap the low bat?
-    if (ballPosition.x >= batLowPosition.x - batLow.getSize()/2 && ballPosition.x <= batLowPosition.x + batLow.getSize()/2)
-      if (ballPosition.y - ball.getSize()/2 <= batLowPosition.y && ballPosition.y + ball.getSize()/2 >= batLowPosition.y)
-        ball.setVelocity( new PVector( ballVelocity.x, -1 * ballVelocity.y) );
+    if (ball.getPosition().x >= batLow.getPosition().x - batLow.getSize()/2 && ball.getPosition().x <= batLow.getPosition().x + batLow.getSize()/2)
+      if (ball.getPosition().y - ball.getSize()/2 <= batLow.getPosition().y && ball.getPosition().y + ball.getSize()/2 >= batLow.getPosition().y)
+        ball.setVelocity( new PVector( ball.getVelocity().x, -1 * abs( ball.getVelocity().y ) ) );
      
   }
 
   // Method to check if the ball has hit either the top or bottom side of the playfield
   // Returns either -1 (top goal hit), 1 (bottom goal hit) or 0 (no goal hit)
   private int checkBallGoalCollisions() {
-    // Get a copy of the ball's current position 
-    PVector ballPosition = ball.getPosition();
     // Check to see if the top goal has been hit
-    if (ballPosition.y < playfieldTopLeft.y) return -1;
+    if (ball.getPosition().y < playfieldTopLeft.y) return -1;
     // Check to see if the bottom goal has been hit
-    if (ballPosition.y > playfieldTopLeft.y + playfieldSize.y) return 1;
+    if (ball.getPosition().y > playfieldTopLeft.y + playfieldSize.y) return 1;
     // If we get to here, no goal was hit
     return 0;
   }

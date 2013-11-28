@@ -1,3 +1,9 @@
+/*
+ * Bat
+ * 
+ */
+
+
 class Bat {
 
   // Position of the bat

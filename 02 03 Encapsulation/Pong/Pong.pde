@@ -1,3 +1,14 @@
+/*
+ * Pong
+ * Author: Michael Mayo
+ *
+ * Implementation of a simple OO Pong game to illustrate encapsulation.
+ * There are three classes:
+ * -- Bat, encapsulating bat state, movement and drawing
+ * -- Ball, encapsulating ball state, movement and drawing
+ * -- Game, encapsulating the game mechanics
+ */
+
 
 // Constants defining size of the sketchpad
 final int SKETCHPAD_WIDTH  = 600;
