@@ -24,8 +24,7 @@ public class Button {
     // Save the ID
     this.id=id;
     // Create a centered label
-    this.label = new Label(text, size, x, y+size/2, 
-    CENTER, #FFFFFF);
+    this.label = new Label(text, size, x, y+size/2,CENTER, #FFFFFF);
     // Store the rectangular bound
     this.position = new PVector( x, y );
     this.size = new PVector( w, h );
@@ -35,7 +34,7 @@ public class Button {
 
   // Getter methods
   public int getID() {
-     return id; 
+    return id;
   }
 
 
@@ -90,14 +89,25 @@ public class Button {
   public void mouseIsReleased() {
     if (state==MOUSE_PRESSED_STATE) {
       state=MOUSE_OVER_STATE;
-      mouseClick(this); 
+      mouseClick();
     }
   }
-  
+
+
   // This method is the handler for mouse clicks on the button
   // Fill it in with whatever you want done
-  public void mouseClick(Button button){
-    println( "button with id="+button.getID()+" pressed!");
+  public void mouseClick() {
+    switch(id) {
+    case BUTTON_OK_ID:
+      println("ok button pressed");
+      break;
+    case BUTTON_CANCEL_ID:
+      println("cancel button pressed");
+      break;
+    default:
+      println("unknown button pressed");
+      break;
+    }
   }
 }
 
