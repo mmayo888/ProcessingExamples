@@ -27,6 +27,9 @@ ArrayList<Button> keypadButtons;
 // Reference to the ENTER button
 Button enterButton;
 
+// The label for displaying the pincode
+Label pinCodeLabel;
+
 // Setup method
 void setup() {
   // Set the size of the sketch
@@ -45,6 +48,8 @@ void setup() {
   keypadButtons.add( new Button("9", TEXT_SIZE, SKETCH_WIDTH/2+2*BUTTON_SIZE, 300, BUTTON_SIZE, BUTTON_SIZE) );
   // Create the enter button
   enterButton = new Button("ENTER", TEXT_SIZE, SKETCH_WIDTH/2, 375, 5 * BUTTON_SIZE, BUTTON_SIZE);
+  // Create the pin code label
+  pinCodeLabel = new Label(pinCode, 100, 25, 100, LEFT, #FF0000);
   // Initialize the pin number to nothing
   pinCode="";
 }
@@ -63,6 +68,8 @@ void draw() {
       pinCode+=(index+1);
       // Limit the pincode length to the maximum
       if (pinCode.length()>PIN_SIZE) pinCode=pinCode.substring(1);
+      // Recreate the pincode's label
+      pinCodeLabel = new Label(pinCode, 100, 25, 100, LEFT, #FF0000);
     }
   // Check the enter button states
   // If the enter button was pressed...
@@ -84,5 +91,7 @@ void draw() {
     button.draw();
   // Draw the ENTER button
   enterButton.draw();
+  // Draw the pin code label
+  pinCodeLabel.draw();
 }
 
