@@ -19,7 +19,7 @@ void setup() {
   // Size the sketch
   size(SKETCH_WIDTH, SKETCH_HEIGHT);
   // Create the pie chart
-  chart = new PieChart();
+  chart = new PieChart(50,50,SKETCH_WIDTH-100);
   // Add some items
   chart.add("USA", 13);
   chart.add("NZ", 70);

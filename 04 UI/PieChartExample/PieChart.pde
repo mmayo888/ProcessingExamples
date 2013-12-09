@@ -1,12 +1,19 @@
 public class PieChart {
 
+  // Bounding square for the pie chart
+  PVector position;
+  float size;
+  
   // Collection of chart items
   private ArrayList<ChartItem> items;
 
-  // Constructor for PieChaarts
-  public PieChart() {
+  // Constructor for pie charts
+  public PieChart(float x, float y, float size) {
+    // Copy the dimensions
+    this.position = new PVector(x,y);
+    this.size=size;
     // Initialize the items array
-    items = new ArrayList<ChartItem>();
+    this.items = new ArrayList<ChartItem>();
   }
 
   // Methods to add a new chart items
@@ -32,12 +39,13 @@ public class PieChart {
       // Compute the size of the wedge, and use it to update angleEnd
       angleEnd = angleStart + (TWO_PI * item.getAmount()/sum);
       // Draw the wedge
-      arc(SKETCH_WIDTH/2, SKETCH_HEIGHT/2, SKETCH_WIDTH, SKETCH_HEIGHT, angleStart, angleEnd, PIE);
+      arc(position.x+size/2, position.y+size/2, 
+          size, size, angleStart, angleEnd, PIE);
       // Draw the label in the middle of the wedge
       float angleMiddle = (angleStart+angleEnd)/2;
       PVector labelPosition = PVector.fromAngle( angleMiddle );
-      labelPosition.mult(SKETCH_WIDTH/4);
-      labelPosition.add(SKETCH_WIDTH/2, SKETCH_HEIGHT/2, 0);
+      labelPosition.mult(size/4);
+      labelPosition.add(position.x+size/2, position.y+size/2, 0);
       textSize(32);
       fill(0);
       text( item.getName(), labelPosition.x, labelPosition.y );
