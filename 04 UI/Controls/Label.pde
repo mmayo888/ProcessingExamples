@@ -31,6 +31,9 @@ public class Label {
   }
 
   // Getter methods
+  public String getText() {
+     return text; 
+  }
   public float getX() {
      return position.x; 
   }

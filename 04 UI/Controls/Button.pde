@@ -1,39 +1,103 @@
 public class Button {
 
+  // Constants specific to the Button class
+  public final int NORMAL_STATE=0;
+  public final int MOUSE_OVER_STATE=1;
+  public final int MOUSE_PRESSED_STATE=2;
+
+  // A unique identifier for the button
+  private int id;
+
   // The label containing the text for the button
   private Label label;
 
-  // Constructor that takes a label
-  public Button(Label label) {
-    this.label = label;
+  // The rectangle bounds of the button
+  private PVector position;
+  private PVector size;
+
+  // The state of the button (NORMAL_STATE, MOUSE_OVER_STATE, MOUSE_PRESSED_STATE)
+  private int state;
+
+  // Constructor that takes an id, string, text size, and a rectanglular bound
+  // for the button
+  public Button(int id, String text, float size, float x, float y, float w, float h) {
+    // Save the ID
+    this.id=id;
+    // Create a centered label
+    this.label = new Label(text, size, x, y+size/2, 
+    CENTER, #FFFFFF);
+    // Store the rectangular bound
+    this.position = new PVector( x, y );
+    this.size = new PVector( w, h );
+    // Set the initial state to normal
+    this.state=NORMAL_STATE;
   }
 
-  // Constructors that do not require a label to be created
-  public Button(String text, float size, float x, float y, color col) {
-    this(new Label(text, size, x, y, CENTER, col));
+  // Getter methods
+  public int getID() {
+     return id; 
   }
 
-  public Button(String text, float x, float y) {
-    this(text, 16, x, y, #FFFFFF);
-  }
-
-  // Method to check to see if the the mouse is over the button
-  public boolean mouseIsOver() {
-    if (mouseX>= label.getX() - label.getWidth()/2 && mouseX<=label.getX() + label.getWidth()/2
-      && mouseY>=label.getY() - label.getHeight() && mouseY<=label.getY()+2)
-      return true;
-    else return false;
-  }
 
   // Draw method that draws the button
   public void draw() {
+    // Draw the rectangular frame
+    rectMode(CENTER);
+    // Apply settings dependent on the state of the button
+    switch (state) {
+    case NORMAL_STATE:
+      noFill();
+      strokeWeight(1);
+      stroke(#0000FF);
+      break;
+    case MOUSE_OVER_STATE:
+      noFill();
+      strokeWeight(4);
+      stroke(#0000FF);
+      break;
+    case MOUSE_PRESSED_STATE:
+      fill(#0000FF);
+      strokeWeight(4);
+      stroke(#0000FF);
+      break;
+    default:; // Should never get here!
+    }
+    // Draw the rectangle with curved corners
+    rect( position.x, position.y, size.x, size.y, 5 );
     // Draw the label
-    label.draw(); 
-    // Draw a rectangle around the button
-    noFill();
-    stroke( label.getColor() );
-    rect( label.getX() - label.getWidth()/2, label.getY() - label.getHeight(), 
-    label.getWidth(), label.getHeight()+2 );
+    label.draw();
+  }
+
+  // Method to tell you if a point lies inside the bounds of this button
+  public boolean pointInRect(float x, float y) {
+    return x>=position.x-size.x/2 && x<=position.x+size.x/2
+      && y>=position.y-size.y/2 && y<=position.y+size.y/2;
+  }
+
+  // Methods to tell the button about state changes
+  public void mouseIsOver() {
+    if (state==NORMAL_STATE)
+      state=MOUSE_OVER_STATE;
+  }
+  public void mouseIsNotOver() {
+    if (state==MOUSE_OVER_STATE)
+      state=NORMAL_STATE;
+  }
+  public void mouseIsPressed() {
+    if (state==MOUSE_OVER_STATE)
+      state=MOUSE_PRESSED_STATE;
+  }
+  public void mouseIsReleased() {
+    if (state==MOUSE_PRESSED_STATE) {
+      state=MOUSE_OVER_STATE;
+      mouseClick(this); 
+    }
+  }
+  
+  // This method is the handler for mouse clicks on the button
+  // Fill it in with whatever you want done
+  public void mouseClick(Button button){
+    println( "button with id="+button.getID()+" pressed!");
   }
 }
 
