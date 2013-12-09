@@ -69,11 +69,16 @@ public class Ball {
     if (position.y>=bat.getY()-bat.getSize()/2 && position.y<=bat.getY()+bat.getSize()/2) 
       // Yes -- the ball and the bat have overlapping y-coordinates
       // Do they also have overlapping x-coordinates?
-      if (abs(position.x - bat.getX())<2)
+      if (abs(position.x - bat.getX())<5)
         collision=true;
-    // If there is a collision, bounce the ball off the bat 
+    // If there is a collision, adjust the ball's velocity by
+    // (i) imparting some of the bat's velocity and
+    // (ii) changing the direction of the ball on the x-axis
     if (collision) {
+      float newVelocityMagnitude = max(velocity.mag(), bat.getVelocityMagnitude());
+      velocity.setMag( newVelocityMagnitude );
       velocity.x *= -1; 
+      move();
     }
   }
 }

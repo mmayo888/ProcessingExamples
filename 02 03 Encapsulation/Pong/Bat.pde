@@ -39,6 +39,9 @@ public class Bat {
   public float getVelocity() { 
     return velocity;
   }
+  public float getVelocityMagnitude() {
+    return abs(velocity); 
+  }
 
   // Debugging method
   public String toString() {
@@ -81,10 +84,12 @@ public class Bat {
   }
 
   // Deccelerate the bat in either direction
+  // Decceleration is at twice the normal acceleration rate to 
+  // prevent overshoots
   public void deccelerate() {
-    if (velocity>0) velocity -= ACCELERATION_CONSTANT;
-    else if (velocity<0) velocity += ACCELERATION_CONSTANT;
-    if (abs(velocity)<ACCELERATION_CONSTANT) velocity = 0;
+    if (velocity>0) velocity -= 2 * ACCELERATION_CONSTANT;
+    else if (velocity<0) velocity += 2 * ACCELERATION_CONSTANT;
+    if (abs(velocity)<2 * ACCELERATION_CONSTANT) velocity = 0;
   }
   
 }

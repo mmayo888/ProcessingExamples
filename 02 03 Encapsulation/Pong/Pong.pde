@@ -17,7 +17,7 @@ public final float RIGHT_BAT_X_POSITION = 1100;
 public final float BALL_RADIUS          = 10;
 
 // The acceleration constant for bat movement in pixels per frame
-public final float ACCELERATION_CONSTANT = 0.1;
+public final float ACCELERATION_CONSTANT = 0.3;
 
 // The keyboard controls
 public final char  BAT_LEFT_UP          = 'a';
@@ -40,6 +40,8 @@ int leftScore, rightScore;
 
 // Setup method
 void setup() {
+  // Turn on smooth animations - may slow frame rate a little
+  smooth();
   // Initialize the size of the window
   size(COURT_WIDTH, COURT_HEIGHT);
   // Create the keyboard object
@@ -84,11 +86,16 @@ void draw() {
   // Draw the ball
   ball.draw();
   // Display the score
-   textSize(32);
-   textAlign(LEFT);
-   text(leftScore, 0, COURT_HEIGHT-32);
-   textAlign(RIGHT);
-   text(rightScore, COURT_WIDTH, COURT_HEIGHT-32);
+  textSize(32);
+  textAlign(LEFT);
+  text(leftScore, 0, COURT_HEIGHT-32);
+  textAlign(RIGHT);
+  text(rightScore, COURT_WIDTH, COURT_HEIGHT-32);
+  // Draw the center line
+  noFill();
+  stroke(255);
+  strokeWeight(2);
+  line(COURT_WIDTH/2, 0, COURT_WIDTH/2, COURT_HEIGHT);
   // Accelerate the bats if a key is being pressed, decellerate if no keys are pressed
   // Accelerate/decelerate the left bat
   if (keyboard.isKeyDown(BAT_LEFT_UP)) leftBat.accelerateUp();
