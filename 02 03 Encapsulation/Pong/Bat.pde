@@ -1,87 +1,90 @@
 /*
  * Bat
  * 
- * A class encapsulating bat that can move and draw itself
+ * A class encapsulating a bat that can be moved, resized, and 
+ * draw itself
  *
  */
 
+public class Bat {
 
-class Bat {
-
-  // Position of the bat
+  // The (x,y) position of the bat
   private PVector position;
 
-  // Colour of the bat
-  private color drawColor;
-
-  // Size of the bat
+  // The size of the bat
   private float size;
 
-  // Velocity of the bat in pixels per frame
+  // The velocity of the bat along the y-axis in pixels per frame
   private float velocity;
 
-  // Accessor methods for the position property
-  public PVector getPosition() {
-     return position.get(); 
-  }
-
-  public void setPosition(PVector val) {
-    position = val;
-  }
-  
-
-  // Accessor method for the drawColor property
-  public color getDrawColor() {
-     return drawColor; 
-  }
-  
-  public void setDrawColor(color val) {
-     drawColor = val; 
-  }
-  
-  // Accessor method for the size property
-  public float getSize() {
-     return size; 
-  }
-  
-  public void setSize(float val) {
-     size = val; 
-  }
-  
-  // Accessor method for the velocity property
-  public float getVelocity() {
-     return velocity; 
-  }
-  
-  public void setVelocity(float val) {
-     velocity = val; 
-  }
-  
   // Constructor
-  public Bat( PVector position, color drawColor, float size, float velocity) {
-    // Copy the parameters 
-    this.position = position;
-    this.drawColor = drawColor;
+  public Bat(float initialX, float initialY, float size) {
+    // Copy the parameters
+    this.position = new PVector(initialX, initialY);
     this.size = size;
-    this.velocity = velocity;
+    // Initialize the velocity to 0
+    velocity = 0;
+  }
+
+  // Getter methods for read-only access to the private data
+  public float getX() { 
+    return position.x;
+  }
+  public float getY() { 
+    return position.y;
+  }
+  public float getSize() { 
+    return size;
+  }
+  public float getVelocity() { 
+    return velocity;
+  }
+
+  // Debugging method
+  public String toString() {
+    return "Bat: position="+position+" size="+size+" velocity="+velocity;
   }
 
   // Draw method
   public void draw() {
-    noFill();
-    stroke(drawColor);
+    // Set the strokecolour to white
+    stroke(255);
+    // Make the stroke thick
     strokeWeight(4);
-    line( position.x - size/2, position.y, position.x + size/2, position.y);
+    // The bat is simply a line
+    line(position.x, position.y - size/2, position.x, position.y + size/2);
   }
-  
-  // Moves the bat left
-  public void moveLeft() {
-     position.x -= velocity; 
+
+  // Move the bat by adding the velocity to the y position
+  // At the same time, prevent movement of the bat off the court
+  // If the bat does hit the court boundary, set the velocity to zero
+  public void move() {
+    position.y += velocity; 
+    if (position.y<0) {
+      position.y=0;
+      velocity=0;
+    } 
+    else if (position.y>COURT_HEIGHT) {
+      position.y=COURT_HEIGHT;
+      velocity=0;
+    }
   }
-  
-  // Moves the bat right
-  public void moveRight() {
-     position.x += velocity; 
+
+  // Accelerate the bat in the upward direction
+  public void accelerateUp() {
+    velocity -= ACCELERATION_CONSTANT;
+  }
+
+  // Accelerate the bat in the downward direction
+  public void accelerateDown() {
+    velocity += ACCELERATION_CONSTANT;
+  }
+
+  // Deccelerate the bat in either direction
+  public void deccelerate() {
+    if (velocity>0) velocity -= ACCELERATION_CONSTANT;
+    else if (velocity<0) velocity += ACCELERATION_CONSTANT;
+    if (abs(velocity)<ACCELERATION_CONSTANT) velocity = 0;
   }
   
 }
