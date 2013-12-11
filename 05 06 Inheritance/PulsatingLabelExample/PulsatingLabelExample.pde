@@ -1,9 +1,8 @@
 /*
- * Controls
+ * PulsatingLabelExample
  * Author: Michael Mayo
  *
- * Demonstrates how to create your own simple UI controls.
- * Illustrates encapsulation and class design.
+ * Demonstrates iheritance from an existing class
  */
 
 // The width and height of the sketch
