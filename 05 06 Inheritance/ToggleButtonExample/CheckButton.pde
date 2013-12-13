@@ -1,7 +1,11 @@
 public class CheckBox extends ToggleButton {
-  
+
   public CheckBox(float x, float y, float size) {
-    super(x, y, size);
+    this(x, y, size, null);
+  } 
+  
+  public CheckBox(float x, float y, float size, String label) {
+    super(x, y, size, label);
   } 
 
   public boolean pointInButtonRegion(float x, float y) {
@@ -9,7 +13,7 @@ public class CheckBox extends ToggleButton {
       &&  y>=position.y && y<=position.y+size;
   }
 
-  public void draw() {
+  public void drawButton() {
     noFill();
     stroke(255);
     strokeWeight(4);

@@ -18,10 +18,10 @@ void setup(){
   size(SKETCH_WIDTH, SKETCH_HEIGHT);
   // Create the objects
   cb1=new CheckBox(100,100,30);
-  cb2=new CheckBox(200,100,30);
+  cb2=new CheckBox(300,100,30, "pizza");
   cb2.set();
   rb1=new RadioButton(100,200,30);
-  rb2=new RadioButton(200,200,30);
+  rb2=new RadioButton(300,200,30, "milk");
   rb2.set();
 }
 
