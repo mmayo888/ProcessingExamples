@@ -9,10 +9,10 @@ public class DottedLine extends AbstractFancyLine {
   // Basic constructor that sets the radius and spacing to sensible defaults
   public DottedLine(float fromX, float fromY, float toX, float toY, color col) {
     super(fromX, fromY, toX, toY, col);
-    this.radius = 10;
+    this.radius = 5;
     this.numDots = (int)getLength()/20;
   }
-  
+
   // Constructor that sets the all options
   public DottedLine(float fromX, float fromY, float toX, float toY, color col, float radius, int numDots) {
     super(fromX, fromY, toX, toY, col);
@@ -26,7 +26,7 @@ public class DottedLine extends AbstractFancyLine {
   public int getNumDots() { 
     return numDots;
   }
- 
+
 
   // The draw method 
   public void draw() {
@@ -38,15 +38,25 @@ public class DottedLine extends AbstractFancyLine {
     // Set the drawing colour 
     fill( getColor() );
     noStroke();
-    // Tell processing to draw ellipses from the center
-    ellipseMode(CENTER);
     // Start at the from position for the first dot
     PVector currentDotPosition = getFrom();
     // Iterate over the dots and draw them!
     for (int dotIndex=0; dotIndex<=numDots; dotIndex++) {
-      ellipse(currentDotPosition.x, currentDotPosition.y, radius, radius);
+      drawDot(currentDotPosition.x, currentDotPosition.y);
       currentDotPosition.add(spacing);
     }
+  }
+
+  // A protected method for drawing individual dots
+  protected void drawDot(float x, float y) {
+    // Tell processing to draw ellipses from the center
+    ellipseMode(CENTER);
+    // Turn off strokes
+    noStroke();
+    // Turn on fill
+    fill( getColor() );
+    // Draw the dot
+    ellipse(x, y, getRadius()*2, getRadius()*2);
   }
 
   // ToString method for debugging

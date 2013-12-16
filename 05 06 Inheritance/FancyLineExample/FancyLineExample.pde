@@ -10,6 +10,7 @@ public final int SKETCH_HEIGHT           = 600;
 
 // Some fancy lines
 DottedLine d1, d2;
+InteractiveDottedLine i1, i2;
 
 // Setup method
 void setup() {
@@ -17,17 +18,24 @@ void setup() {
   size(SKETCH_WIDTH, SKETCH_HEIGHT);
   // Create some objects
   d1=new DottedLine(50, 50, 200, 200, #63AF0E);
-  d2=new DottedLine(200, 200, 500, 50, #A1289E, 20, 5);
+  d2=new DottedLine(200, 200, 500, 50, #A1289E, 10, 5);
+  i1=new InteractiveDottedLine(50, 500, 550, 500, #63AF0E);
+  i2=new InteractiveDottedLine(200, 550, 550, 489, #A1289E, 10, 5);
 
   // Debug the objects
   println(d1);
   println(d2);
+  println(i1);
+  println(i2);
 }
 
 // Draw method
 void draw() {
+  background(0);
   // Draw the lines
   d1.draw();
-  d2.draw();  
+  d2.draw(); 
+  i1.draw();
+  i2.draw();  
 }
 
