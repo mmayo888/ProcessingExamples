@@ -19,7 +19,7 @@ public class DottedLine extends AbstractFancyLine {
     this.radius = radius;
     this.numDots = numDots;
   }
-  // Getters/Setters for the radius and spacing
+  // Getters for the radius and spacing
   public float getRadius() { 
     return radius;
   }
