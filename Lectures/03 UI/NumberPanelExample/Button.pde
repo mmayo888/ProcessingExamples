@@ -48,7 +48,7 @@ class Button {
     case STATE_CLICKED:
       strokeWeight(2*strokeWeight); 
       break;
-    default:
+    case STATE_NORMAL:
       strokeWeight(strokeWeight); 
       break;
     }
