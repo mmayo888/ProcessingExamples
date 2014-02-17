@@ -1,4 +1,7 @@
 
+// Declare a constant for the number of bars shown
+final int NUM_BARS=10;
+
 // Declare a new array defining the x position of a rectangle
 float[] positions;
 
@@ -7,7 +10,7 @@ void setup() {
   // 600x600 sketch please
   size(600, 600); 
   // Create an empty positions array
-  positions = new float[ 10 ];
+  positions = new float[ NUM_BARS ];
   // Fill the array
   for (int index=0; index<positions.length; index++) {
     positions[ index ] = index * 60;
