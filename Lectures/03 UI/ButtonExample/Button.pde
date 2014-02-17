@@ -11,8 +11,8 @@ class Button {
 
   // Colors for the button
   public color strokeColor=#FFFFFF, // white
-  fillColor=#2222FF, // blueish
-  textColor=#000000;        // black
+  fillColor=#2222FF,                // blueish
+  textColor=#000000;                // black
 
   // Stroke weight for the frame
   public int strokeWeight=4;
