@@ -7,6 +7,8 @@ void setup(){
   size(600,600);
   // Create a button
   exampleButton = new Button(width/2, height/2, 200, 75);
+  // Set its public properties, e.g.
+  exampleButton.fillColor=#61C12F;
 }
 
 // Draw method
