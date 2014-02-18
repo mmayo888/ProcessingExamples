@@ -31,8 +31,13 @@ class BarChart extends Chart {
       fill(#000000);
       String name = dataSource.getName(index);
       textAlign(CENTER);
+      textSize(size.y/25);
       // Rotate and position the text
-      text(name, position.x+index*barWidth+barWidth/2, position.y+size.y);
+      pushMatrix();
+      translate(position.x+index*barWidth+barWidth/2, position.y+size.y+50);
+      rotate(-PI/4);
+      text(name, 0,0);
+      popMatrix();
     }
 
     // Draw the labels
