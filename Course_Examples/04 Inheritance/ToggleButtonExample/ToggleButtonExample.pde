@@ -1,25 +1,19 @@
-/*
- * ToggleButtonGroups
- * Author: Michael Mayo
- *
- */
 
-
-// Some exampe objects
+// Some example objects
 CheckBox cb1, cb2;
 RadioButton rb1, rb2;
 
 // Setup method
 void setup(){
   // Set sketch size
-  size(600, 600);
+  size(600, 300);
   // Create the objects
-  cb1=new CheckBox(100,100,30);
+  cb1=new CheckBox(100,100,30, null);
   cb2=new CheckBox(300,100,30, "pizza");
   cb2.set();
-  rb1=new RadioButton(100,200,30);
+  rb1=new RadioButton(100,200,30, null);
+  rb1.set();
   rb2=new RadioButton(300,200,30, "milk");
-  rb2.set();
 }
 
 // Draw method
