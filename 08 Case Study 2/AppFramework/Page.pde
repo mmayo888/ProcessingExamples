@@ -10,6 +10,9 @@ class Page {
   // Handy vector for storing the size of the page
   protected PVector size;
 
+  // The time (in milliseconds) that this page was shown
+  protected int timePageShown;
+
   // Constructor
   public Page(int w, int h, PageManager manager) {
     // Create a graphics context
@@ -18,6 +21,8 @@ class Page {
     this.manager=manager;
     // Store the size and top left
     size = new PVector(w,h);
+    // Set the rest of the page up
+    pageShown();
   }
 
   // Method for drawing the page, may be overridden
@@ -45,7 +50,9 @@ class Page {
   public void tapDrag(float x, float y) {}
   
   // Method called when the page is shown for the first time
-  public void pageShown() {}
+  public void pageShown() {
+    timePageShown=millis();
+  }
   
   // Method to get the size of the page
   public PVector size() {

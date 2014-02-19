@@ -9,6 +9,7 @@ class Page_PlayGame extends Page {
 
   // Draw method for the title page
   protected void draw() {
+    g.fill(manager.assets.defaultTextColor);
     g.textFont(manager.assets().defaultFont);
     g.textAlign(CENTER, CENTER);
     g.text("PlayGame Page\ntap 10 times to finish\n"+count, g.width/2, g.height/2);
@@ -22,7 +23,10 @@ class Page_PlayGame extends Page {
   }
   
   // Method to reset the game when the page is first shown
-  public void pageShown() { count=0; }
+  public void pageShown() { 
+    super.pageShown();
+    count=0;
+  }
   
 }
 
