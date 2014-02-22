@@ -1,9 +1,6 @@
 class Page {
 
 
-  // The PGraphics context
-  protected PGraphics g;
-
   // The page manager for this page
   protected PageManager manager;
 
@@ -15,8 +12,6 @@ class Page {
 
   // Constructor
   public Page(int w, int h, PageManager manager) {
-    // Create a graphics context
-    g=createGraphics(w, h);
     // Store a reference to the manager
     this.manager=manager;
     // Store the size and top left
@@ -27,19 +22,11 @@ class Page {
 
   // Method for drawing the page, may be overridden
   protected void draw() {
-    g.textFont(manager.assets().defaultFont);
-    g.textAlign(CENTER, CENTER);
-    g.text("Page index="+manager.getPageIndex(),g.width/2, g.height/2);
+    textFont(manager.assets().defaultFont);
+    textAlign(CENTER, CENTER);
+    text("Page index="+manager.getPageIndex(),width/2, height/2);
   }
 
-  // Method for rendering the page to an image, should not be overridden
-  final public PImage render() {
-    g.beginDraw();
-    g.background(0);
-    draw();
-    g.endDraw(); 
-    return g;
-  }
 
   // Events that pages care about, override as you wish
   // Assumes that (x,y) have been adjusted into page coordinates

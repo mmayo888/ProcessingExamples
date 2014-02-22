@@ -35,10 +35,8 @@ class PageManager {
       text("No page to render!", position.x, position.y);
       return;
     } 
-    // If there is a page to render, render it
-    imageMode(CENTER);
-    PImage img = pages.get(pageIndex).render();
-    image(img, position.x, position.y);
+    // Otherwise draw the page
+    pages.get(pageIndex).draw();
   }
 
   // Method to get the current page index

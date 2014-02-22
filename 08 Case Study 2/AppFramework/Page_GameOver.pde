@@ -7,10 +7,11 @@ class Page_GameOver extends Page {
 
   // Draw method for the title page
   protected void draw() {
-    g.fill(manager.assets.defaultTextColor);
-    g.textFont(manager.assets().defaultFont);
-    g.textAlign(CENTER, CENTER);
-    g.text("GameOver Page\ntap to start again", g.width/2, g.height/2);
+    background(0);
+    fill(manager.assets.defaultTextColor);
+    textFont(manager.assets().defaultFont);
+    textAlign(CENTER, CENTER);
+    text("GameOver Page\ntap to start again", width/2, height/2);
   }
   
   // Navigate back to title page

@@ -7,16 +7,17 @@ class Page_Title extends Page {
 
   // Draw method for the title page
   protected void draw() {
+    background(0);
     // If the page has just been shown, fade in the title text 
     // by changing the default alpha with elapsed time
     color c=manager.assets.defaultTextColor;
     if (millis()-timePageShown<=1000)
       c=color(red(c),green(c),blue(c),255*(millis()-timePageShown)/1000);
-    g.fill(c);
+    fill(c);
     // Draw the title
-    g.textFont(manager.assets().defaultFont);
-    g.textAlign(CENTER, CENTER);
-    g.text("Title Page\ntap to start", g.width/2, g.height/2);
+    textFont(manager.assets().defaultFont);
+    textAlign(CENTER, CENTER);
+    text("Title Page\ntap to start", width/2, height/2);
   }
 
 
