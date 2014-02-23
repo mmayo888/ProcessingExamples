@@ -2,7 +2,7 @@
 // Declare a constant for the number of bars shown
 final int NUM_BARS=10;
 
-// Declare a new array defining the x position of a rectangle
+// Declare a new array defining the x positions of a bars
 float[] positions;
 
 // Setup method
@@ -19,11 +19,15 @@ void setup() {
 
 // Draw method
 void draw() {
+  // Start with a white background
   background(255);
+  // No stroke on the bars required
   noStroke();
-  fill(0);
+  // Iterate over the bars
   for (int index=0; index<positions.length; index++) {
+    // Determine the colour of the current bar
     color fillColor = getFillColor(index);
+    // Draw the bar
     fill(fillColor);
     rect(positions[index], 0, width/positions.length, height);
   }

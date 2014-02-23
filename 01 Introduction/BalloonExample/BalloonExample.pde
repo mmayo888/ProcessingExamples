@@ -1,6 +1,6 @@
 
 // Declaration of global variables defining the positions
-// and colours for the baloon and the sky
+// and colours for the balloon and the sky
 float x,y,radius;
 color fillColor, strokeColor, skyColor;
 
@@ -12,7 +12,7 @@ void setup(){
   x=width/2;
   y=0;
   radius=50;
-  // Set the colours
+  // Set the drawing colours
   fillColor=color(231, 67, 88);  // color function
   strokeColor=#000000;           // black!
   skyColor=#88A2FA;              // hex color notation
@@ -23,7 +23,7 @@ void draw() {
   // Declare some local variables
   float balloonWidth = radius * 2;
   float balloonHeight = radius * 2;
-  // Clear the screen, setting it to sky blue
+  // Clear the screen, setting it to the sky's colour
   background(skyColor);
   // Draw the balloon
   ellipseMode(CENTER);
