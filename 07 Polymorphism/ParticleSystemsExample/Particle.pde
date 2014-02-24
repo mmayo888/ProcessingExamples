@@ -65,11 +65,7 @@ class Particle {
       ttl -= 2;
     }
   }
-  
-  // A method jitter the particle's velocity by a certain amount
-  public void jitterVelocity(float howMuch) {
-      velocity.rotate( howMuch/2 - random(howMuch) );
-  }
+ 
 
 
 }

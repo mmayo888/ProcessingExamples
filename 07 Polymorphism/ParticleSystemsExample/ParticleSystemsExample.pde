@@ -4,11 +4,10 @@ ArrayList<ParticleEmitter> emitters;
 
 // Setup method
 void setup(){
-  size(600,600);
+  size(600,600,P2D);
+  // Create a list of emitters
   emitters = new ArrayList<ParticleEmitter>();
-  emitters.add(new ParticleEmitter(width/2, height/2, -PI/2));
-  emitters.add(new ParticleEmitter(width/2, height/2, -3*PI/4));
-  emitters.add(new ParticleEmitter(width/2, height/2, -PI/4));
+  emitters.add(new HoseParticleEmitter(width/8, height/2, -PI/4));
   
 }
 

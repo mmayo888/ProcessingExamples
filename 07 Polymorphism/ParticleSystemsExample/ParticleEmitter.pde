@@ -1,8 +1,7 @@
-class ParticleEmitter {
+abstract class ParticleEmitter {
 
-  // Emitters have a position and orientation
+  // Emitters have a position 
   protected PVector position;
-  public float orientation;
   
   // Emitters have an initial particle velocity magnitude
   public float initialParticleVelocityMagnitude;
@@ -11,10 +10,9 @@ class ParticleEmitter {
   protected ArrayList<Particle> particles;
 
   // Constructor
-  public ParticleEmitter(float x, float y, float orientation) {
+  public ParticleEmitter(float x, float y) {
     particles=new ArrayList<Particle>();
     position = new PVector(x,y);
-    this.orientation=orientation;
     initialParticleVelocityMagnitude=4;
   }
 
@@ -35,18 +33,15 @@ class ParticleEmitter {
     for (Particle particle: particles)
       if (particle.isDead()) deadParticles.add(particle);
     particles.removeAll(deadParticles);
-    // Create new particles with probability 10% per frame
-    if (random(1)<0.1) {
-      // Create random direction for the velocity
-      PVector velocity = PVector.fromAngle(orientation);
-      // Scale the velocity appropriately
-      velocity.mult(initialParticleVelocityMagnitude);
-      // Create and jitter the particle
-      Particle particle = new Particle(position.x,position.y,velocity.x,velocity.y);
-      particle.jitterVelocity(PI/8);
+    // Create new particles with probability 30% per frame
+    if (random(1)<0.3) {
       // Add the particle to the list of particles
-      particles.add(particle);
+      particles.add( createParticle() );
     }
   }
+  
+  // Helper method to create a new particle -- must be implemented by specific types
+  // of emitter
+  abstract protected Particle createParticle();
 }
 
