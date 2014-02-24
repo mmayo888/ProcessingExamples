@@ -9,6 +9,9 @@ class Particle {
   // Particles have a colour
   public color col;
 
+  // Particles have a rate at which they age
+  public float agingRate;
+  
   // Particles have a time to live
   protected int ttl;
 
@@ -19,6 +22,7 @@ class Particle {
     size = width/50;
     col = #FFFFFF;
     ttl = 255;
+    agingRate = 3;
   }
 
   public Particle(float x, float y) {
@@ -62,7 +66,7 @@ class Particle {
   public void move() {
     if (!isDead()) {
       position.add(velocity);
-      ttl -= 2;
+      ttl -= agingRate;
     }
   }
  

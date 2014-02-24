@@ -5,6 +5,9 @@ abstract class ParticleEmitter {
   
   // Emitters have an initial particle velocity magnitude
   public float initialParticleVelocityMagnitude;
+
+  // Emitters have a probability per frame of emitting a new particle
+  public float probNewParticlePerFrame;
   
   // List of particles created by the emitter
   protected ArrayList<Particle> particles;
@@ -14,6 +17,7 @@ abstract class ParticleEmitter {
     particles=new ArrayList<Particle>();
     position = new PVector(x,y);
     initialParticleVelocityMagnitude=4;
+    probNewParticlePerFrame=0.5;
   }
 
   // Draw method
@@ -33,8 +37,8 @@ abstract class ParticleEmitter {
     for (Particle particle: particles)
       if (particle.isDead()) deadParticles.add(particle);
     particles.removeAll(deadParticles);
-    // Create new particles with probability 30% per frame
-    if (random(1)<0.3) {
+    // Create new particles 
+    if (random(1)<probNewParticlePerFrame) {
       // Add the particle to the list of particles
       particles.add( createParticle() );
     }

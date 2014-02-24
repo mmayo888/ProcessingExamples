@@ -5,9 +5,15 @@ ArrayList<ParticleEmitter> emitters;
 // Setup method
 void setup(){
   size(600,600,P2D);
-  // Create a list of emitters
+  // Create some emitters
+  HoseParticleEmitter hose = new HoseParticleEmitter(100, 500, -PI/4);
+  hose.initialParticleVelocityMagnitude=8;
+  ExplosionEmitter explosion = new ExplosionEmitter(400,200);
+  explosion.probNewParticlePerFrame=0.8;
+  // Create and populate a list of emitters
   emitters = new ArrayList<ParticleEmitter>();
-  emitters.add(new HoseParticleEmitter(width/8, height/2, -PI/4));
+  emitters.add(hose);
+  emitters.add(new ExplosionEmitter(400,200));
   
 }
 

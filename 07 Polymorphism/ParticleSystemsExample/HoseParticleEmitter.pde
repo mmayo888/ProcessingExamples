@@ -1,7 +1,7 @@
 class HoseParticleEmitter extends ParticleEmitter {
 
   // Gravitational acceleration constant in pixels per frame
-  public final float ACCELERATION_DUE_TO_GRAVITY = 0.25;
+  public float accelerationDueToGravity = 0.25;
   
   // Hose emitter have an orientation
   public float orientation;
@@ -36,7 +36,7 @@ class HoseParticleEmitter extends ParticleEmitter {
     // Apply gravitational acceleration to the particles
     for (Particle particle: particles) {
       PVector velocity = particle.getVelocity();
-      velocity.y += ACCELERATION_DUE_TO_GRAVITY;
+      velocity.y += accelerationDueToGravity;
       particle.setVelocity(velocity.x, velocity.y);
     }
   }
