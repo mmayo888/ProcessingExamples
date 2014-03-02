@@ -35,7 +35,7 @@ void draw() {
 
 // A function to get a gray scale color given an array index
 color getFillColor(int arrayPositionIndex) {
-  color result = color( 255 * arrayPositionIndex/positions.length);
+  color result = color( 255.0 * arrayPositionIndex/positions.length);
   return result;
 }
 
