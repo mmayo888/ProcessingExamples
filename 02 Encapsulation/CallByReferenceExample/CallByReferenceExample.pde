@@ -3,16 +3,16 @@ PImage fireImage, fireImageProcessed;
 
 // Setup method
 void setup() {
-  // Sketch size
-  size(600, 300);
   // Load the fire image
   fireImage=loadImage("fire.jpg");
   fireImage.resize(300, 0);
+  // Sketch size
+  size(fireImage.width * 2, fireImage.height);
   // Process a copy of the image
   fireImageProcessed=processImage(fireImage);
 }
 
-// Method to process an image
+// Method to copy and process an image
 PImage processImage(PImage image) {
   int w=image.width, h=image.height;
   PImage result = createImage(w, h, image.format);
@@ -22,7 +22,8 @@ PImage processImage(PImage image) {
   return result;
 }
 
-// Erroneous method to process an image
+// Erroneous method to copy and process an image that fails
+// to copy the image first
 PImage __processImage(PImage image) {
   image.filter(GRAY);
   image.filter(BLUR);
