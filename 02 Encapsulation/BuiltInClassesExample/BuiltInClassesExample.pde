@@ -1,5 +1,5 @@
 
-// Declare some references to object
+// Declare some references to objects
 PVector start, end;
 PImage myImage, anotherImage;
 PFont myFont;
