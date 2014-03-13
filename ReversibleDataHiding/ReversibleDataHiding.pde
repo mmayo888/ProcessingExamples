@@ -4,6 +4,7 @@ Image8Bit imageOriginal, imageModified;
 void setup() {
   // Create two identical images
   imageOriginal = new Image8Bit("lenna.png");
+  //imageOriginal = new Image8Bit("dog.jpg");
   imageModified = new Image8Bit(imageOriginal);
   // Size the sketch
   size(imageOriginal.w()*2, imageOriginal.h());
