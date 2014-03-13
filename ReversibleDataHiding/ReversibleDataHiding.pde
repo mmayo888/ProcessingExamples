@@ -8,15 +8,15 @@ void setup() {
   imageModified = new Image8Bit(imageOriginal);
   // Size the sketch
   size(imageOriginal.w()*2, imageOriginal.h());
-  // Modify one of the images by get the lsb, modifying it randomly, and setting it
-  boolean[] lsb = imageModified.getLSB();
-  for (int index=0; index<lsb.length; index++)
-    lsb[index]=(random(1)<0.5);
-  imageModified.setLSB(lsb);
+  // Modify one of the images
+  for (int index=0; index<imageModified.numPixels(); index++){
+    int val = imageModified.get(index);
+    imageModified.set(index, val & 254); // unset lsb
+  }
   // Ensure that modifications are displayed
   imageModified.clearToPImageBuffer();
   // Display Info
-  println("LSB plane has "+lsb.length+" bits");
+  println("Image has has "+imageModified.numPixels()+" pixels");
   println("MSE after unsetting LSB: "+imageOriginal.calcMeanSquaredError(imageModified));
   println("PNSR after unsetting LSB: "+imageOriginal.calcPeakSignalToNoiseRatio(imageModified));
 }

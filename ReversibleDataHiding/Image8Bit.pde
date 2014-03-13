@@ -98,25 +98,5 @@ class Image8Bit {
     return 20*Math.log10(255)-10*Math.log10(mse);
   }
   
-  // A method to unset ALL of the least significant bits (lsbs) of this image
-  public void unsetLeastSignificentBits() {
-    for (int index=0; index<intensity.length; index++) 
-      intensity[ index ] &= 254;
-  }
-  
-  // A method to return an array of booleans, those being the state of the LSB
-  public boolean[] getLSB() {
-    boolean[] result = new boolean[ intensity.length ];
-    for (int index=0; index<intensity.length; index++) 
-      result[ index ] = (intensity[ index ] & 1)==1;
-    return result;
-  }
-  
-  // A method to set an array of booleans, must be the correct length
-  public void setLSB(boolean[] values) {
-    for (int index=0; index<intensity.length; index++) 
-      if (values[ index ]) intensity[ index ] |= 1; // set
-      else intensity[ index ] &= 254;               // unset
-  }
 }
 
