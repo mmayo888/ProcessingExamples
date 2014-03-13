@@ -81,14 +81,20 @@ class Image8Bit {
     toPImageBuffer=null;
   }
 
-  // A method to calculate the PNSR between this image and another of the same dimensions
-  public double calcPeakSignalToNoiseRatio(Image8Bit otherImage) {
-    float mse=0;
+  // A method to calculate the MSE between this image and another of the same dimensions
+  public double calcMeanSquaredError(Image8Bit otherImage) {
+    double mse=0;
     for (int index=0; index<intensity.length; index++) {
       int otherVal = otherImage.get(index);
       mse += (intensity[ index ] - otherVal) * (intensity[ index ] - otherVal);
     }
     mse /= intensity.length;
+    return mse;
+  }
+
+  // A method to calculate the PNSR between this image and another of the same dimensions
+  public double calcPeakSignalToNoiseRatio(Image8Bit otherImage) {
+    double mse=calcMeanSquaredError(otherImage);
     return 20*Math.log10(255)-10*Math.log10(mse);
   }
   

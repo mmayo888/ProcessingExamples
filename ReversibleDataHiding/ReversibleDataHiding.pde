@@ -17,6 +17,7 @@ void setup() {
   imageModified.clearToPImageBuffer();
   // Display Info
   println("LSB plane has "+lsb.length+" bits");
+  println("MSE after unsetting LSB: "+imageOriginal.calcMeanSquaredError(imageModified));
   println("PNSR after unsetting LSB: "+imageOriginal.calcPeakSignalToNoiseRatio(imageModified));
 }
 
