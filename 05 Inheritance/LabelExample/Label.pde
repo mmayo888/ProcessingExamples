@@ -12,17 +12,17 @@ public class Label {
   // Constructor -- set default values for the fields
   public Label() {
     text="-- put text here --";
-    font=createFont("SansSerif",32);
+    font=createFont("SansSerif", 32);
     col = #FFFFFF;
   }
-  
+
   // Method to draw the label
   public void draw(float x, float y) {
-      // Draw the text
-      if (font != null) textFont(font);
-      fill(col);
-      textAlign(CENTER, CENTER);
-      text(text,x,y);
+    // Draw the text
+    if (font != null) textFont(font);
+    fill(col);
+    textAlign(CENTER, CENTER);
+    text(text, x, y);
   }
 }
 

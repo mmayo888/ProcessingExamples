@@ -13,7 +13,7 @@ class RotatingBlob extends Blob {
     // Rotate all the points in the outline
     for (PVector point: outline) 
        point.rotate(rotationSpeed); 
-    // Draw the blob
+    // Draw the blob using Blob's version of draw()
     super.draw();
   }
 }

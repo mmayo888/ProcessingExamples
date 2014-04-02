@@ -10,10 +10,10 @@ public class FunkyLabel extends Label {
   }
 
   // Method to draw the funky label
+  // This method overrides the draw method from Label
   public void draw(float x, float y) {
     // Draw the text
-    super.draw(x++,y++);
-    for (float lerpAmount=0.1; lerpAmount<=1.0; lerpAmount+=0.1) {
+    for (float lerpAmount=0.0; lerpAmount<=1.0; lerpAmount+=0.1) {
       fill( lerpColor(col, foreCol, lerpAmount) );
       text(text, x++, y++);
     }
