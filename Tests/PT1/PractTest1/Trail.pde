@@ -1,4 +1,4 @@
-// A class representing a trail, which is a route through the maze
+// A class representing a trail, which is a route 
 // drawn by the user
 
 public class Trail {

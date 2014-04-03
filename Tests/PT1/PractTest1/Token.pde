@@ -1,5 +1,5 @@
-// A class representing a token, which is typically the start or
-// end point of the maze
+// A class representing a token, which is typically a start or
+// end point 
 
 class Token {
 
