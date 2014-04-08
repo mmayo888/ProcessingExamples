@@ -1,4 +1,4 @@
-public class FunkyLabel extends Label {
+class FunkyLabel extends Label {
 
   // Fields specific to FunkyLabel
   public color foreCol;
