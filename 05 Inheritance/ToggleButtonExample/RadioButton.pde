@@ -1,4 +1,4 @@
-public class RadioButton extends ToggleButton {
+class RadioButton extends ToggleButton {
   
   // The center of the circular shape that makes the radio button
   private PVector center;

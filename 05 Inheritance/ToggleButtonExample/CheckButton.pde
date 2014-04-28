@@ -1,4 +1,4 @@
-public class CheckBox extends ToggleButton {
+class CheckBox extends ToggleButton {
 
   // Constructor  
   public CheckBox(float x, float y, float size, String label) {

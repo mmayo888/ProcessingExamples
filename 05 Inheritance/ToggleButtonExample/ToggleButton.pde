@@ -1,4 +1,4 @@
-abstract public class ToggleButton {
+abstract class ToggleButton {
 
   // The (x,y) coordinate of the button on the screen
   protected PVector position;
