@@ -57,6 +57,7 @@ class Lion extends Feline {
     println("Roar!");
   }
   public void attack(){
+    println("A lion attacks!");
   }
 }  
 
