@@ -40,7 +40,6 @@ class BarChart extends Chart {
       popMatrix();
     }
 
-    // Draw the labels
   }
 }
 

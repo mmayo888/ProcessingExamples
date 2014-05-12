@@ -27,7 +27,18 @@ void setup() {
   // Make each animal speak
   for (Animal currentAnimal: animals)
     currentAnimal.speak();
+    
+  // Make the lions attack
+  makeAllLionsAttack(animals);
 }
+
+// Function to make all the lions attack!
+void makeAllLionsAttack(ArrayList<Animal> manyAnimals){
+  for (Animal currentAnimal: animals)
+    if (currentAnimal instanceof Lion)
+      ((Lion)currentAnimal).attack();
+}
+
 
 // The class definitions
 abstract class Animal {

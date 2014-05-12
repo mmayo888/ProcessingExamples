@@ -19,4 +19,8 @@ class Employee extends Person {
    public float hourlyRate; 
 }
 
+class Manager extends Person {
+   public float salary; 
+}
+
 
