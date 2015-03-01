@@ -13,7 +13,7 @@ void setup(){
   start = new PVector(0,0);
   end = new PVector(300,150);
   // Create the image object
-  myImage = loadImage("tree.jpg");
+  myImage = loadImage("data/tree.jpg");
   // Resize the image so it is not too big
   myImage.resize(200,0);
   // Create the font object
