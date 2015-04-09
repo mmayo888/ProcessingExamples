@@ -6,6 +6,9 @@ class NumberPanel {
   // Numbers pressed so far
   public String text="";
 
+  // Length of a pin number in characters
+  public int PIN_NUMBER_LENGTH=4;
+
   // Constructor
   public NumberPanel() {
     // Create the collection of buttons
@@ -51,8 +54,8 @@ class NumberPanel {
   // Button click event
   public void buttonClicked(Button whichOne) {
     text+=whichOne.text; 
-    if (text.length()>4) 
-      text=text.substring(text.length()-4);
+    if (text.length()>PIN_NUMBER_LENGTH) 
+      text=text.substring(text.length()-PIN_NUMBER_LENGTH);
   }
 }
 
