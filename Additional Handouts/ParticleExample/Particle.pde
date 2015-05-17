@@ -22,8 +22,7 @@ class Particle {
   public void move() {   
      position.add( velocity );
      velocity.add( acceleration ); 
-     if (position.y>=groundLevel)
-      if (velocity.y>0) {
+     if (position.y>=groundLevel) {
         position.y = groundLevel;
         velocity.y *= -0.8 ; 
      }
