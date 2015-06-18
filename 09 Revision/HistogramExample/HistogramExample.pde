@@ -53,8 +53,8 @@ void revQ2(){
 }
 
 void setup(){
-   revQ1(); 
-   //revQ2(); 
+   //revQ1(); 
+   revQ2(); 
 }
 
 
